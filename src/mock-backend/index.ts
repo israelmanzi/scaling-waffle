@@ -17,17 +17,18 @@ type UseCheckout = {
 
 export const useCheckout = (): UseCheckout => {
   const [balance, setBalance] = React.useState<number>(initialBalance);
+  const [items, setItems] = React.useState<Item[]>(initialItems);
   return {
     buy: async (itemId: Item['id']) => {
       const newState = await executePurchase(itemId, {
         balance,
-        items: initialItems,
+        items: items,
       });
-
+      if (newState.success) setItems(newState.data!.items);
       setBalance(newState.balance);
       return newState;
     },
-    items: initialItems,
+    items,
     balance,
   };
 };

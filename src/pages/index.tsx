@@ -25,7 +25,7 @@ const Index = () => {
       hideProgressBar: true,
       closeOnClick: true,
     });
-    const { success: successfull, message } = await buy(product.id);
+    const { success: successfull, message, data } = await buy(product.id);
     console.log({ successfull });
     if (successfull) {
       toast.success(`You bought ${product.name}!`, {
@@ -35,6 +35,8 @@ const Index = () => {
         closeOnClick: true,
         pauseOnHover: true,
       });
+
+      console.log(data);
     } else {
       toast.error(message, {
         position: 'top-right',
@@ -66,7 +68,9 @@ const Index = () => {
             )
             .map((item) => (
               <div key={item.id} className={styles.product}>
-                <h1>{item.name}</h1>
+                <h1>
+                  {item.name} -- {item.inventory}
+                </h1>
                 <p>${item.price}</p>
                 <button
                   className={[
