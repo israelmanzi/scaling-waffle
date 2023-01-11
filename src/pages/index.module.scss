@@ -1,3 +1,33 @@
 .main {
   padding-top: 40px;
 }
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product {
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.product .buyButton {
+  padding: 20px 40px;
+  background-color: #000;
+  color: white;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  font-size: larger;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.product .buyButton.outOfStock {
+  background-color: tomato;
+}
