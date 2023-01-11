@@ -12,13 +12,12 @@ type UseCheckout = {
   buy: (itemId: Item['id']) => Promise<void>;
 };
 
-export const useCheckout = (): UseCheckout => {
+export const useCheckout = (): UseCheckout =>
   // @TODO: Not implemented
-  return {
+  ({
     buy: async (itemId: Item['id']) => {
       // @TODO: Not implemented
       // executePurchase(...)
     },
     items: initialItems, // @TODO: Not implemented
-  };
-};
+  });

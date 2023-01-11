@@ -1,5 +1,5 @@
-import styles from './index.module.scss';
 import { useCheckout } from '../mock-backend';
+import styles from './index.module.scss';
 
 const Index = () => {
   const { items, buy } = useCheckout();
