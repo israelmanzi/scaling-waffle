@@ -1,4 +1,5 @@
 import { initialBalance, initialItems, Item } from './data';
+import { executePurchase } from './purchase';
 
 type UseCheckout = {
   items: Item[];
@@ -12,12 +13,12 @@ type UseCheckout = {
   buy: (itemId: Item['id']) => Promise<void>;
 };
 
-export const useCheckout = (): UseCheckout =>
-  // @TODO: Not implemented
-  ({
-    buy: async (itemId: Item['id']) => {
-      // @TODO: Not implemented
-      // executePurchase(...)
-    },
-    items: initialItems, // @TODO: Not implemented
-  });
+export const useCheckout = (): UseCheckout => ({
+  buy: async (itemId: Item['id']) => {
+    await executePurchase(itemId, {
+      balance: initialBalance,
+      items: initialItems,
+    });
+  },
+  items: initialItems,
+});
