@@ -28,26 +28,30 @@ describe('Purchase', () => {
 
     expect(data).toEqual({
       balance: 94.15,
-      items: [
-        {
-          id: 0,
-          name: 'Hair Shampoo',
-          price: 5.17,
-          inventory: 5,
-        },
-        {
-          id: 1,
-          name: 'Hair Conditioner',
-          price: 5.17,
-          inventory: 4,
-        },
-        {
-          id: 2,
-          name: 'Laptop',
-          price: 517,
-          inventory: 2,
-        },
-      ],
+      data: {
+        balance: 94.15,
+        items: [
+          {
+            id: 0,
+            name: 'Hair Shampoo',
+            price: 5.17,
+            inventory: 5,
+          },
+          {
+            id: 1,
+            name: 'Hair Conditioner',
+            price: 5.85,
+            inventory: 4,
+          },
+          {
+            id: 2,
+            name: 'Laptop',
+            price: 517,
+            inventory: 2,
+          },
+        ],
+      },
+      success: true,
     });
     expect(data.data?.balance).toBe(94.15);
 
