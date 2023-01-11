@@ -1,5 +1,6 @@
+import React from 'react';
 import { initialBalance, initialItems, Item } from './data';
-import { executePurchase } from './purchase';
+import { executePurchase, PurchaseResponse } from './purchase';
 
 type UseCheckout = {
   items: Item[];
@@ -10,15 +11,23 @@ type UseCheckout = {
    * @throws if the current account does not have enough or if no inventory
    *
    */
-  buy: (itemId: Item['id']) => Promise<void>;
+  buy: (itemId: Item['id']) => Promise<PurchaseResponse>;
+  balance: number;
 };
 
-export const useCheckout = (): UseCheckout => ({
-  buy: async (itemId: Item['id']) => {
-    await executePurchase(itemId, {
-      balance: initialBalance,
-      items: initialItems,
-    });
-  },
-  items: initialItems,
-});
+export const useCheckout = (): UseCheckout => {
+  const [balance, setBalance] = React.useState<number>(initialBalance);
+  return {
+    buy: async (itemId: Item['id']) => {
+      const newState = await executePurchase(itemId, {
+        balance,
+        items: initialItems,
+      });
+
+      setBalance(newState.balance);
+      return newState;
+    },
+    items: initialItems,
+    balance,
+  };
+};

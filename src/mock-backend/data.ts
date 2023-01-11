@@ -33,7 +33,7 @@ export const initialItems: Item[] = [
     id: 1,
     name: 'Hair Conditioner',
     price: 5.85,
-    inventory: 5,
+    inventory: 0,
   },
   {
     id: 2,
@@ -52,5 +52,11 @@ export const initialItems: Item[] = [
     name: 'Milk',
     price: 1.0,
     inventory: 25,
+  },
+  {
+    id: 5,
+    name: 'Water',
+    price: 1.99,
+    inventory: 0,
   },
 ];
