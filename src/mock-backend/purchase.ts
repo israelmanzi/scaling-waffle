@@ -1,7 +1,7 @@
 import { Item } from './data';
 import { sleep } from './utils';
 
-type UserAndItemState = {
+export type UserAndItemState = {
   balance: number;
   items: Item[];
 };

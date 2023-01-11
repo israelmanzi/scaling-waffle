@@ -1,4 +1,4 @@
-import { initialItems, Item } from './data';
+import { initialBalance, initialItems, Item } from './data';
 import { executePurchase } from './purchase';
 
 type UseCheckout = {
@@ -16,7 +16,7 @@ type UseCheckout = {
 export const useCheckout = (): UseCheckout => ({
   buy: async (itemId: Item['id']) => {
     await executePurchase(itemId, {
-      balance: 20,
+      balance: initialBalance,
       items: initialItems,
     });
   },
