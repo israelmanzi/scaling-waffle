@@ -6,6 +6,13 @@ export type UserAndItemState = {
   items: Item[];
 };
 
+export type PurchaseResponse = {
+  data?: UserAndItemState;
+  message?: string;
+  success: boolean;
+  balance: number;
+};
+
 /**
  * Modifies `state`, given an `itemId` to purchase
  * @returns {UserAndItemState} the updated state if a purchase should succeed
@@ -13,7 +20,7 @@ export type UserAndItemState = {
 export const executePurchase = async (
   itemId: Item['id'],
   state: UserAndItemState
-): Promise<{ data?: UserAndItemState; message?: string; success: boolean }> => {
+): Promise<PurchaseResponse> => {
   await sleep(1000);
 
   const item = state.items.find((item) => item.id === itemId);
@@ -22,6 +29,7 @@ export const executePurchase = async (
     return {
       message: `Item with id ${itemId} not found`,
       success: false,
+      balance: state.balance,
     };
   }
 
@@ -29,6 +37,7 @@ export const executePurchase = async (
     return {
       message: `Item with id ${itemId} is out of stock`,
       success: false,
+      balance: state.balance,
     };
   }
 
@@ -36,10 +45,12 @@ export const executePurchase = async (
     return {
       message: 'Insufficient funds',
       success: false,
+      balance: state.balance,
     };
   }
 
   return {
+    balance: state.balance - item.price,
     data: {
       balance: state.balance - item.price,
       items: state.items.map((item) => {
